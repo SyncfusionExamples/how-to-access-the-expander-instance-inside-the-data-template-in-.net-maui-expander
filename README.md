@@ -7,10 +7,13 @@ XAML
 
 In SfPopup, behavior added to parent of SfExpander.
 
-<StackLayout>
+
+    <StackLayout>
+
     <StackLayout.Behaviors>
          <local:PopupBehavior/>
     </StackLayout.Behaviors>
+
      <Button Text="open popup" VerticalOptions="Start" HorizontalOptions="Center"/>
      <popup:SfPopup x:Name="popup" ShowFooter="False" ShowHeader="False" HeightRequest="400" WidthRequest="400">
          <popup:SfPopup.ContentTemplate>
@@ -21,7 +24,6 @@ In SfPopup, behavior added to parent of SfExpander.
                              <local:Behavior/>
                          </StackLayout.Behaviors>
                          <Button Text="Expand/collapse" x:Name="expanderButton"/>
-
                          <expander:SfExpander x:Name="firstExpander">
                              <expander:SfExpander.Header>
                                  <Grid>
@@ -70,16 +72,17 @@ In SfPopup, behavior added to parent of SfExpander.
                  </ScrollView>
              </DataTemplate>
          </popup:SfPopup.ContentTemplate>
-     </popup:SfPopup>
- </StackLayout>
- 
+    </popup:SfPopup>
+    </StackLayout>
+
 C#
 In ChildAdded event you will get the instance of Expander.
 
- public class Behavior:Behavior<StackLayout>
- {
-     StackLayout stack;   
-     SfExpander expander;
+     public class Behavior:Behavior<StackLayout>
+     
+     {
+          StackLayout stack;   
+          SfExpander expander;
 
      protected override void OnAttachedTo(StackLayout bindable)
      {
@@ -96,7 +99,7 @@ In ChildAdded event you will get the instance of Expander.
              expander = e.Element as SfExpander;
          }
      }
-     
+
      protected override void OnDetachingFrom(StackLayout bindable)
      {
          stack.ChildAdded -= Stack_ChildAdded;
@@ -104,15 +107,16 @@ In ChildAdded event you will get the instance of Expander.
          expander = null;
          base.OnDetachingFrom(bindable);
      }
- }
+    }
+
 C#
 You can also get the Expander using FindByName method from Parent element.
 
-internal class Behavior:Behavior<StackLayout>
-{
-    StackLayout stack;
-    Button button;
-    SfExpander expander;
+    internal class Behavior:Behavior<StackLayout>     
+    {
+        StackLayout stack;
+        Button button;
+        SfExpander expander;
 
     protected override void OnAttachedTo(StackLayout bindable)
     {
@@ -154,6 +158,5 @@ internal class Behavior:Behavior<StackLayout>
         expander = null;
         base.OnDetachingFrom(bindable);
     }
-}
-View sample in Github
+    }
 
